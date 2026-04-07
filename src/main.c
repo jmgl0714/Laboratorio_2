@@ -1,6 +1,4 @@
-// Juego de reaccion - Matriz LED bicolor 4x4 - ESP32 / ESP-IDF
-// Boton reaccion: GPIO0 con pull-up interno (activa LOW)
-// Boton pausa:   GPIO18 con pull-up interno (activa LOW) → otro lado a GND
+// Juego de reaccion
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -18,7 +16,7 @@
 #define NUM_ROWS        4
 #define NUM_COLS        4
 
-// Polaridad de activacion (anodo comun en columnas, catodo en filas)
+// Polaridad de activacion 
 #define COL_ACTIVE      1
 #define COL_INACTIVE    0
 #define ROW_ACTIVE      0
@@ -27,7 +25,7 @@
 // Botones
 #define BUTTON_PIN          GPIO_NUM_0   // boton de reaccion
 #define BUTTON_PAUSE_PIN    GPIO_NUM_18  // boton de pausa
-#define BUTTON_ACTIVE       0            // activa LOW por pull-up interno
+#define BUTTON_ACTIVE       0            
 
 // Tiempos en microsegundos
 #define REFRESH_US      1000
@@ -36,7 +34,7 @@
 #define WAIT_MIN_US     700000
 #define WAIT_MAX_US     5000000
 
-// Pines de columnas (anodo comun)
+// Pines de columnas 
 gpio_num_t col_pins[NUM_COLS] = {
     GPIO_NUM_13,
     GPIO_NUM_12,
@@ -44,7 +42,7 @@ gpio_num_t col_pins[NUM_COLS] = {
     GPIO_NUM_27
 };
 
-// Pines de filas ROJAS (catodo) - fila 0 arriba, fila 3 abajo
+// Pines de filas ROJAS 
 gpio_num_t red_row_pins[NUM_ROWS] = {
     GPIO_NUM_26,
     GPIO_NUM_25,
@@ -52,7 +50,7 @@ gpio_num_t red_row_pins[NUM_ROWS] = {
     GPIO_NUM_32
 };
 
-// Pines de filas VERDES (catodo) - fila 0 arriba, fila 3 abajo
+// Pines de filas VERDES
 gpio_num_t green_row_pins[NUM_ROWS] = {
     GPIO_NUM_23,
     GPIO_NUM_22,
@@ -68,7 +66,6 @@ typedef enum {
     PAUSED
 } game_state_t;
 
-// Framebuffers
 static uint8_t red_frame[NUM_ROWS];
 static uint8_t green_frame[NUM_ROWS];
 
@@ -81,7 +78,6 @@ static int64_t      start_time       = 0;
 static int64_t      state_time       = 0;
 static int64_t      wait_dur_us      = 0;
 
-// Prototipos
 void    gpio_init_all(void);
 void    clear_frames(void);
 void    all_off(void);
